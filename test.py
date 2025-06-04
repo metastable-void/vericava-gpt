@@ -8,7 +8,26 @@ pipe = pipeline(
 
 try:
     while True:
-        user_input = input("> ").strip()
-        print(pipe(user_input, num_return_sequences=1)[0]["generated_text"])
+        user_input = " ".join(input("> ").strip().split("\n"))
+        if user_input == "":
+            continue
+
+        user_input = user_input if (
+            user_input.endswith("。")
+            or user_input.endswith("?")
+            or user_input.endswith("!")
+            or user_input.endswith("？")
+            or user_input.endswith("！")
+        ) else user_input + "。"
+
+        gen_text = pipe(user_input, num_return_sequences=1)[0]["generated_text"]
+        gen_text = gen_text[len(user_input):]
+
+        gen_text = gen_text[:gen_text.find("\n")] if "\n" in gen_text else gen_text
+        gen_text = gen_text[:(gen_text.rfind("。") + 1)] if "。" in gen_text else gen_text
+
+        print(gen_text)
 except EOFError:
-    print("Exiting.")
+    print("\nBye. Exiting.")
+except KeyboardInterrupt:
+    print("\nInterrupted. Bye.")
