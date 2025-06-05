@@ -20,7 +20,11 @@ try:
             or user_input.endswith("！")
         ) else user_input + "。"
 
-        gen_text = pipe(user_input, num_return_sequences=1)[0]["generated_text"]
+        gen_text = pipe(
+            user_input,
+            num_return_sequences=1,
+            temperature=1.2,
+        )[0]["generated_text"]
         gen_text = gen_text[len(user_input):]
 
         gen_text = gen_text[:gen_text.find("\n")] if "\n" in gen_text else gen_text
