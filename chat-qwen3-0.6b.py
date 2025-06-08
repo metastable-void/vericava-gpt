@@ -3,7 +3,7 @@ from transformers import pipeline
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 pipe = pipeline(
-    "text-generation", model="vericava/qwen3-0.6b-vericava-posts-v3", device=device
+    "text-generation", model="vericava/qwen3-0.6b-vericava-posts-v4", device=device
 )
 
 try:
@@ -23,8 +23,8 @@ try:
         gen_text = pipe(
             user_input,
             num_return_sequences=1,
-            temperature=0.9,
-            max_new_tokens=256,
+            temperature=0.7,
+            max_new_tokens=512,
             repetition_penalty=2.0,
         )[0]["generated_text"]
         gen_text = gen_text[len(user_input):]
