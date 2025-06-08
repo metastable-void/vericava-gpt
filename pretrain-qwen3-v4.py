@@ -20,7 +20,7 @@ raw_datasets = DatasetDict(
     )
 
 
-context_length = 1024
+context_length = 512
 tokenizer = T5Tokenizer.from_pretrained("rinna/japanese-gpt-1b")
 
 TOKENS = []
