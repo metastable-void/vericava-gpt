@@ -19,7 +19,7 @@ raw_datasets = DatasetDict(
     )
 
 
-context_length = 2048
+context_length = 1024
 tokenizer = T5Tokenizer.from_pretrained("rinna/japanese-gpt-1b")
 
 TOKENS = []
@@ -69,13 +69,13 @@ data_collator = DataCollatorForLanguageModeling(tokenizer, mlm=False)
 
 args = TrainingArguments(
     output_dir="qwen3-0.6b-vericava-posts-v4",
-    per_device_train_batch_size=8,
-    per_device_eval_batch_size=8,
+    per_device_train_batch_size=32,
+    per_device_eval_batch_size=32,
     eval_strategy="steps",
     eval_steps=100,
     logging_steps=100,
-    gradient_accumulation_steps=4,
-    num_train_epochs=75,
+    gradient_accumulation_steps=8,
+    num_train_epochs=100,
     weight_decay=0.1,
     warmup_steps=300,
     lr_scheduler_type="cosine",
