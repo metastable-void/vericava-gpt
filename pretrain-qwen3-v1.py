@@ -4,7 +4,7 @@
 import json
 
 from transformers import Trainer, TrainingArguments
-from transformers import AutoTokenizer, Qwen3Model, AutoConfig
+from transformers import AutoTokenizer, Qwen3ForCausalLM, AutoConfig
 from datasets import load_dataset, DatasetDict
 from transformers import DataCollatorForLanguageModeling
 
@@ -60,7 +60,7 @@ config = AutoConfig.from_pretrained(
     eos_token_id=tokenizer.eos_token_id,
 )
 
-model = Qwen3Model(config)
+model = Qwen3ForCausalLM(config)
 model_size = sum(t.numel() for t in model.parameters())
 print(f"Qwen3 size: {model_size/1000**2:.1f}M parameters")
 
