@@ -8,12 +8,6 @@ from transformers import T5Tokenizer, Qwen3ForCausalLM, AutoConfig
 from datasets import load_dataset, DatasetDict
 from transformers import DataCollatorForLanguageModeling
 
-from accelerate import Accelerator
-from accelerate import DistributedDataParallelKwargs
-
-ddp_kwargs = DistributedDataParallelKwargs(find_unused_parameters=True)
-accelerator = Accelerator(kwargs_handlers=[ddp_kwargs])
-device = accelerator.device
 
 ds_train = load_dataset("./datasets/train", split="train")
 ds_valid = load_dataset("./datasets/validation", split="train")
@@ -68,22 +62,18 @@ config = AutoConfig.from_pretrained(
 )
 
 model = Qwen3ForCausalLM(config)
-model.to(device)
-
-model = accelerator.prepare(model)
 
 model_size = sum(t.numel() for t in model.parameters())
 print(f"Qwen3 size: {model_size/1000**2:.1f}M parameters")
 
 tokenizer.pad_token = tokenizer.eos_token
-data_collator = accelerator.prepare(DataCollatorForLanguageModeling(tokenizer, mlm=False))
+data_collator = DataCollatorForLanguageModeling(tokenizer, mlm=False)
 
 args = TrainingArguments(
     output_dir="qwen3-0.6b-vericava-posts-v4",
     per_device_train_batch_size=32,
     per_device_eval_batch_size=32,
-    eval_strategy="steps",
-    eval_steps=100,
+    eval_strategy="none",
     logging_steps=100,
     gradient_accumulation_steps=8,
     num_train_epochs=100,
