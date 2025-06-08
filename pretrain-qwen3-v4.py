@@ -4,7 +4,7 @@
 import json
 
 from transformers import Trainer, TrainingArguments
-from transformers import AutoTokenizer, Qwen3ForCausalLM, AutoConfig
+from transformers import T5Tokenizer, Qwen3ForCausalLM, AutoConfig
 from datasets import load_dataset, DatasetDict
 from transformers import DataCollatorForLanguageModeling
 
@@ -19,8 +19,8 @@ raw_datasets = DatasetDict(
     )
 
 
-context_length = 128
-tokenizer = AutoTokenizer.from_pretrained("rinna/japanese-gpt-1b")
+context_length = 2048
+tokenizer = T5Tokenizer.from_pretrained("rinna/japanese-gpt-1b")
 
 TOKENS = []
 
