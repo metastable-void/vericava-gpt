@@ -14,7 +14,7 @@ ds_valid = load_dataset("./datasets/validation", split="train")
 
 raw_datasets = DatasetDict(
     {
-        "train": concatenate_datasets(ds_train, ds_valid),  # .shuffle().select(range(50000)),
+        "train": concatenate_datasets([ds_train, ds_valid]),  # .shuffle().select(range(50000)),
     }
 )
 
