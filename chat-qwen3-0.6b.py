@@ -3,7 +3,7 @@ from transformers import pipeline
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 pipe = pipeline(
-    "text-generation", model="vericava/qwen3-0.6b-vericava-posts-v4", device=device
+    "text-generation", model="vericava/qwen3-0.6b-vericava-posts-v5", device=device
 )
 
 try:
