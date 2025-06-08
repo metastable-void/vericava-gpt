@@ -8,6 +8,13 @@ from transformers import T5Tokenizer, Qwen3ForCausalLM, AutoConfig
 from datasets import load_dataset, DatasetDict
 from transformers import DataCollatorForLanguageModeling
 
+from accelerate import Accelerator
+from accelerate import DistributedDataParallelKwargs
+
+ddp_kwargs = DistributedDataParallelKwargs(find_unused_parameters=True)
+accelerator = Accelerator(kwargs_handlers=[ddp_kwargs])
+device = accelerator.device
+
 ds_train = load_dataset("./datasets/train", split="train")
 ds_valid = load_dataset("./datasets/validation", split="train")
 
@@ -61,6 +68,10 @@ config = AutoConfig.from_pretrained(
 )
 
 model = Qwen3ForCausalLM(config)
+model.to(device)
+
+model = accelerator.prepare(model)
+
 model_size = sum(t.numel() for t in model.parameters())
 print(f"Qwen3 size: {model_size/1000**2:.1f}M parameters")
 
