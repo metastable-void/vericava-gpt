@@ -76,7 +76,7 @@ model_size = sum(t.numel() for t in model.parameters())
 print(f"Qwen3 size: {model_size/1000**2:.1f}M parameters")
 
 tokenizer.pad_token = tokenizer.eos_token
-data_collator = DataCollatorForLanguageModeling(tokenizer, mlm=False)
+data_collator = accelerator.prepare(DataCollatorForLanguageModeling(tokenizer, mlm=False))
 
 args = TrainingArguments(
     output_dir="qwen3-0.6b-vericava-posts-v4",
