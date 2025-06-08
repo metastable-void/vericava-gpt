@@ -71,8 +71,7 @@ data_collator = DataCollatorForLanguageModeling(tokenizer, mlm=False)
 
 args = TrainingArguments(
     output_dir="qwen3-0.6b-vericava-posts-v4",
-    per_device_train_batch_size=32,
-    per_device_eval_batch_size=32,
+    auto_find_batch_size=True,
     eval_strategy="no",
     logging_steps=100,
     gradient_accumulation_steps=8,
