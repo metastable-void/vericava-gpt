@@ -24,6 +24,8 @@ try:
             user_input,
             num_return_sequences=1,
             temperature=0.9,
+            max_new_tokens=256,
+            repetition_penalty=2.0,
         )[0]["generated_text"]
         gen_text = gen_text[len(user_input):]
 
