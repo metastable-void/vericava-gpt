@@ -33,21 +33,21 @@ tokenizer = AutoTokenizer.from_pretrained("tokyotech-llm/Llama-3.3-Swallow-70B-v
 print(raw_datasets)
 
 def tokenize(element):
-    outputs = tokenizer(
+    return tokenizer(
         element["text"],
     )
-    input_batch = []
-    n = context_length
+#    input_batch = []
+#    n = context_length
 
-    for input_ids in outputs:
-        for input_id in input_ids:
-            input_batch.append(input_id)
-        input_batch.append(tokenizer.eos_token_id)
-    batch = [input_batch[i:i + n] for i in range(0, len(input_batch), n)]
-    return {"input_ids": [item for item in batch if len(item) == n]}
+#    for input_ids in outputs:
+#        for input_id in input_ids:
+#            input_batch.append(input_id)
+#        input_batch.append(tokenizer.eos_token_id)
+#    batch = [input_batch[i:i + n] for i in range(0, len(input_batch), n)]
+#    return {"input_ids": [item for item in batch if len(item) == n]}
 
 tokenized_datasets = raw_datasets.map(
-    tokenize, batched=True, remove_columns=["text"]
+    tokenize, batched=True,
 )
 
 print(tokenized_datasets)
