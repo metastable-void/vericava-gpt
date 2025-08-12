@@ -47,7 +47,7 @@ def tokenize(element):
     return {"input_ids": [item for item in batch if len(item) == n]}
 
 tokenized_datasets = raw_datasets.map(
-    tokenize, batched=False, remove_columns=raw_datasets["train"].column_names
+    tokenize, batched=True, remove_columns=raw_datasets["train"].column_names
 )
 
 print(tokenized_datasets)
