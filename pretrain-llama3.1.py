@@ -44,7 +44,7 @@ def tokenize(element):
             input_batch.append(input_id)
         input_batch.append(tokenizer.eos_token_id)
     batch = [input_batch[i:i + n] for i in range(0, len(input_batch), n)]
-    return [item for item in batch if len(item) == n]
+    return {"input_ids": [item for item in batch if len(item) == n]}
 
 tokenized_datasets = raw_datasets.map(
     tokenize, batched=False, remove_columns=raw_datasets["train"].column_names
