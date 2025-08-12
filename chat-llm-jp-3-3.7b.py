@@ -20,13 +20,9 @@ try:
             or user_input.endswith("！")
         ) else user_input + "。"
 
-        gen_config = GenerationConfig(
-        )
-
         gen_text = pipe(
             user_input,
             num_return_sequences=1,
-            generation_config=gen_config,
             temperature=0.8,
             top_p=0.95,
             top_k=30,
