@@ -33,9 +33,9 @@ tokenizer = AutoTokenizer.from_pretrained("tokyotech-llm/Llama-3.3-Swallow-70B-v
 print(raw_datasets)
 
 def tokenize(element):
-    return {"input_ids": tokenizer(
+    return tokenizer(
         element["text"],
-    ) }
+    )
 #    input_batch = []
 #    n = context_length
 
