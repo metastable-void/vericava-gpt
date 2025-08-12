@@ -1,5 +1,5 @@
 import torch
-from transformers import pipeline
+from transformers import pipeline, GenerationConfig
 
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 pipe = pipeline(
@@ -20,9 +20,7 @@ try:
             or user_input.endswith("！")
         ) else user_input + "。"
 
-        gen_text = pipe(
-            user_input,
-            num_return_sequences=1,
+        gen_config = GenerationConfig(
             temperature=0.8,
             top_p=0.95,
             top_k=30,
@@ -32,6 +30,12 @@ try:
             do_sample=True,
             repetition_penalty=2.0,
             length_penalty=-0.4,
+        )
+
+        gen_text = pipe(
+            user_input,
+            num_return_sequences=1,
+            generation_config=gen_config,
         )[0]["generated_text"]
         gen_text = gen_text[len(user_input):]
 
