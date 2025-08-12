@@ -28,9 +28,10 @@ try:
             top_k=50,
             min_p=0,
             max_new_tokens=512,
-            min_new_tokens=2,
+            min_new_tokens=3,
             do_sample=True,
             repetition_penalty=2.0,
+            length_penalty=-0.4,
         )[0]["generated_text"]
         gen_text = gen_text[len(user_input):]
 
