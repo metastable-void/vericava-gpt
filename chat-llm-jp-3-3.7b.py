@@ -23,11 +23,12 @@ try:
         gen_text = pipe(
             user_input,
             num_return_sequences=1,
-            temperature=0.6,
+            temperature=1,
             top_p=0.95,
-            top_k=20,
+            top_k=50,
             min_p=0,
             max_new_tokens=512,
+            min_new_tokens=2,
             do_sample=True,
             repetition_penalty=2.0,
         )[0]["generated_text"]
