@@ -70,7 +70,7 @@ data_collator = DataCollatorForLanguageModeling(tokenizer, mlm=False)
 
 args = TrainingArguments(
     output_dir="Llama-3.1-vericava-posts-v1",
-    auto_find_batch_size=True,
+    auto_find_batch_size=False,
     eval_strategy="no",
     logging_steps=100,
     gradient_accumulation_steps=8,
