@@ -39,7 +39,7 @@ def tokenize(element):
     input_batch = []
     n = context_length
 
-    for input_ids in outputs["input_ids"]:
+    for input_ids in outputs:
         for input_id in input_ids:
             input_batch.append(input_id)
         input_batch.append(tokenizer.eos_token_id)
