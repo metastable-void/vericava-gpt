@@ -19,7 +19,7 @@ raw_datasets = DatasetDict(
 )
 
 
-#context_length = 8192
+context_length = 128000
 tokenizer = AutoTokenizer.from_pretrained("tokyotech-llm/Llama-3.3-Swallow-70B-v0.4")
 
 #TOKENS = []
