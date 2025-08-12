@@ -34,8 +34,8 @@ try:
         )[0]["generated_text"]
         gen_text = gen_text[len(user_input):]
 
-        gen_text = gen_text[:gen_text.find("\n")] if "\n" in gen_text else gen_text
-        gen_text = gen_text[:(gen_text.rfind("。") + 1)] if "。" in gen_text else gen_text
+        #gen_text = gen_text[:gen_text.find("\n")] if "\n" in gen_text else gen_text
+        #gen_text = gen_text[:(gen_text.rfind("。") + 1)] if "。" in gen_text else gen_text
 
         print(gen_text)
 except EOFError:
