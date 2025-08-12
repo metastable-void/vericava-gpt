@@ -31,8 +31,8 @@ try:
             min_new_tokens=3,
             do_sample=True,
             repetition_penalty=4.0,
-            length_penalty=-1.0,
-            num_beams=4,
+            #length_penalty=-1.0,
+            num_beams=1,
         )[0]["generated_text"]
         gen_text = gen_text[len(user_input):]
 
