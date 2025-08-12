@@ -23,9 +23,9 @@ try:
         gen_text = pipe(
             user_input,
             num_return_sequences=1,
-            temperature=0.8,
-            top_p=0.95,
-            top_k=30,
+            temperature=1.0,
+            top_p=0.9,
+            top_k=20,
             min_p=0,
             max_new_tokens=64,
             min_new_tokens=3,
